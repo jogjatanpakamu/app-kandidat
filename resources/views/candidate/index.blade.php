@@ -22,9 +22,6 @@
         <div class="d-flex mb-3">
             <h1>DATA CANDIATE</h1>
 
-            @auth
-
-            @endauth
             <?php $cek = Auth::user()->level;
             if ($cek === 'superadmin') :
             ?>
@@ -54,21 +51,27 @@
                                 <td>{{ $candidate->email }}</td>
                                 <td>{{ $candidate->birthday }}</td>
                                 <td>{{ $candidate->resume }}</td>
-                                <td>
+
+
+                                <?php $cek = Auth::user()->level;
+                         if ($cek === 'superadmin') :
+            ?>
+
+                                <td class="">
                                     <a href="{{ route('candidate.show', $candidate->id) }}" type="button"
                                         class="btn btn-primary"><i class="far fa-eye"></i></a>
+
                                     <a href="{{ route('candidate.edit', $candidate->id) }}" type="button"
                                         class="btn btn-primary"><i class="fa fa-pencil-ruler"></i></a>
+                                    <a href="{{ route('candidate.destroy', $candidate->id) }}" type="button"
+                                        class="btn btn-primary"><i class="fa fa-pencil-ruler"></i></a>
 
-                                    <form action="{{ route('candidate.destroy', $candidate->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger"> <i
-                                                class="fa fa-trash"></i></button>
-
-                                    </form>
 
                                 </td>
+                                <?php else:?>
+
+                                <td><a href="{{ asset('storage/resume/' . $candidate->resume) }}">LIHAT DATA</a></td>
+                                <?php endif; ?>
                             </tr>
                         @endforeach
 

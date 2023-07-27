@@ -76,7 +76,6 @@ class HomeController extends Controller
     {
 
         $collec = Candidate::find($id);
-
         return view('candidate.partials.show', compact('collec'));
     }
 
@@ -88,8 +87,6 @@ class HomeController extends Controller
         //
 
         $collec = Candidate::find($id);
-
-
         return view('candidate.partials.edit', compact('collec'));
     }
 
@@ -101,8 +98,6 @@ class HomeController extends Controller
 
         $candidate =  Candidate::find($id);
 
-
-
         // if ($request->file) {
         //     $resume = $request->file('resume');
         //     $name = $request->name;
@@ -112,9 +107,6 @@ class HomeController extends Controller
         //         $request->file('resume')->storeAs('resume', $name, 'public');
         //     }
         // }
-
-
-
 
         // dd($candidate);
         $candidate->name = $request->name;
@@ -134,7 +126,6 @@ class HomeController extends Controller
         //
 
         Candidate::destroy($id);
-
         return back();
     }
 }

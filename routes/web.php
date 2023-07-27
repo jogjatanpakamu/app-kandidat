@@ -18,4 +18,5 @@ Route::post('candidate', [HomeController::class, 'store'])->name('candidate.stor
 Route::get('candidate/{id}', [HomeController::class, 'show'])->name('candidate.show');
 Route::get('candidate/{id}/edit', [HomeController::class, 'edit'])->name('candidate.edit');
 Route::post('candidate/update/{id}', [HomeController::class, 'update'])->name('candidate.update');
-Route::delete('candidate/{id}', [HomeController::class, 'destroy'])->name('candidate.destroy');
+// Route::delete('candidate/{id}', [HomeController::class, 'destroy'])->name('candidate.destroy');
+Route::get('candidate/hapus/{id}', [HomeController::class, 'destroy'])->name('candidate.destroy');
