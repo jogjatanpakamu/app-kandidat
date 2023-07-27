@@ -15,7 +15,6 @@
 
 
 
-    {{ Auth::check() }}
 
     <a href="{{ route('logout') }}">KELUAR</a>
 
@@ -56,7 +55,8 @@
                                 <td>{{ $candidate->birthday }}</td>
                                 <td>{{ $candidate->resume }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                    <a href="{{ route('candidate.show', $candidate->id) }}" type="button"
+                                        class="btn btn-primary"><i class="far fa-eye"></i></a>
                                 </td>
                             </tr>
                         @endforeach

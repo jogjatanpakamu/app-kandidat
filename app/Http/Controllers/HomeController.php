@@ -70,6 +70,9 @@ class HomeController extends Controller
     public function show(string $id)
     {
         //
+
+        dd(Candidate::find($id));
+        echo 'oke';
     }
 
     /**
