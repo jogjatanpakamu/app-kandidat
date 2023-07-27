@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Candidate;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -18,7 +20,10 @@ class HomeController extends Controller
 
         // var_dump(User::find(1));
 
-        $candidates = Candidate::all();
+        // $candidates = Candidate::all();
+        $candidates = DB::select('select * from candidates');
+
+        // dd($candidates);
         return view('candidate.index', compact('candidates'));
     }
 
@@ -69,10 +74,10 @@ class HomeController extends Controller
      */
     public function show(string $id)
     {
-        //
 
-        dd(Candidate::find($id));
-        echo 'oke';
+        $collec = Candidate::find($id);
+
+        return view('candidate.partials.show', compact('collec'));
     }
 
     /**
@@ -81,6 +86,11 @@ class HomeController extends Controller
     public function edit(string $id)
     {
         //
+
+        $collec = Candidate::find($id);
+
+
+        return view('candidate.partials.edit', compact('collec'));
     }
 
     /**
@@ -88,7 +98,32 @@ class HomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $candidate =  Candidate::find($id);
+
+
+
+        // if ($request->file) {
+        //     $resume = $request->file('resume');
+        //     $name = $request->name;
+        //     $fileExtension = $resume->getClientOriginalExtension();
+        //     if ($resume) {
+        //         $name = $name  . '.' . $fileExtension;
+        //         $request->file('resume')->storeAs('resume', $name, 'public');
+        //     }
+        // }
+
+
+
+
+        // dd($candidate);
+        $candidate->name = $request->name;
+        $candidate->email = $request->email;
+        $candidate->birthday = $request->birthday;
+        $candidate->resume = $candidate->resume;
+        $candidate->update();
+
+        return redirect()->route('candidate');
     }
 
     /**
@@ -97,5 +132,9 @@ class HomeController extends Controller
     public function destroy(string $id)
     {
         //
+
+        Candidate::destroy($id);
+
+        return back();
     }
 }

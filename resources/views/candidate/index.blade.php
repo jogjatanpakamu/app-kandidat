@@ -57,6 +57,17 @@
                                 <td>
                                     <a href="{{ route('candidate.show', $candidate->id) }}" type="button"
                                         class="btn btn-primary"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('candidate.edit', $candidate->id) }}" type="button"
+                                        class="btn btn-primary"><i class="fa fa-pencil-ruler"></i></a>
+
+                                    <form action="{{ route('candidate.destroy', $candidate->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger"> <i
+                                                class="fa fa-trash"></i></button>
+
+                                    </form>
+
                                 </td>
                             </tr>
                         @endforeach
