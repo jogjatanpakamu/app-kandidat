@@ -22,7 +22,17 @@
     <div class="container mt-5">
         <div class="d-flex mb-3">
             <h1>DATA CANDIATE</h1>
+
+            @auth
+
+            @endauth
+            <?php $cek = Auth::user()->level;
+            if ($cek === 'superadmin') :
+            ?>
+
             <a href="{{ route('candidate.new') }}" class="btn btn-success ml-auto"> NEW CANDIDATE</a>
+
+            <?php endif;?>
         </div>
         <div class="row">
             <div class="col-12">
